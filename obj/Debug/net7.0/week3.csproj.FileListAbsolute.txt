@@ -1,0 +1,15 @@
+/home/tandev/Desktop/Learn TDC/Ky3/LyThuyetDoThi/week3/bin/Debug/net7.0/week3
+/home/tandev/Desktop/Learn TDC/Ky3/LyThuyetDoThi/week3/bin/Debug/net7.0/week3.deps.json
+/home/tandev/Desktop/Learn TDC/Ky3/LyThuyetDoThi/week3/bin/Debug/net7.0/week3.runtimeconfig.json
+/home/tandev/Desktop/Learn TDC/Ky3/LyThuyetDoThi/week3/bin/Debug/net7.0/week3.dll
+/home/tandev/Desktop/Learn TDC/Ky3/LyThuyetDoThi/week3/bin/Debug/net7.0/week3.pdb
+/home/tandev/Desktop/Learn TDC/Ky3/LyThuyetDoThi/week3/obj/Debug/net7.0/week3.csproj.AssemblyReference.cache
+/home/tandev/Desktop/Learn TDC/Ky3/LyThuyetDoThi/week3/obj/Debug/net7.0/week3.GeneratedMSBuildEditorConfig.editorconfig
+/home/tandev/Desktop/Learn TDC/Ky3/LyThuyetDoThi/week3/obj/Debug/net7.0/week3.AssemblyInfoInputs.cache
+/home/tandev/Desktop/Learn TDC/Ky3/LyThuyetDoThi/week3/obj/Debug/net7.0/week3.AssemblyInfo.cs
+/home/tandev/Desktop/Learn TDC/Ky3/LyThuyetDoThi/week3/obj/Debug/net7.0/week3.csproj.CoreCompileInputs.cache
+/home/tandev/Desktop/Learn TDC/Ky3/LyThuyetDoThi/week3/obj/Debug/net7.0/week3.dll
+/home/tandev/Desktop/Learn TDC/Ky3/LyThuyetDoThi/week3/obj/Debug/net7.0/refint/week3.dll
+/home/tandev/Desktop/Learn TDC/Ky3/LyThuyetDoThi/week3/obj/Debug/net7.0/week3.pdb
+/home/tandev/Desktop/Learn TDC/Ky3/LyThuyetDoThi/week3/obj/Debug/net7.0/week3.genruntimeconfig.cache
+/home/tandev/Desktop/Learn TDC/Ky3/LyThuyetDoThi/week3/obj/Debug/net7.0/ref/week3.dll
