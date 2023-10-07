@@ -1,5 +1,4 @@
 ﻿using System;
-
 namespace TienIchDoThi
 {
 
@@ -45,7 +44,7 @@ namespace TienIchDoThi
             {
                 for (int j = 0; j < maTran.GetLength(1); j++)
                 {
-                    System.Console.Write(maTran[i, j] + " ");
+                    System.Console.Write(maTran[i,j] + " ");
                 }
                 System.Console.WriteLine();
             }
@@ -56,21 +55,21 @@ namespace TienIchDoThi
         {
             int soDinh = 0;
             int[,] maTran;
-
             try
             {
                 using (StreamReader streamReader = new StreamReader(path))
                 {
                     soDinh = int.Parse(streamReader.ReadLine());
-                    maTran = new int[soDinh, soDinh];
-                    string[] arrSt = streamReader.ReadLine().Split(',');
+                    maTran = new int[soDinh,soDinh];
+                    
 
                     for (int i = 0; i < maTran.GetLength(0); i++)
                     {
                         // convert item in arrSt type string to int
+                        string[] arrSt = streamReader.ReadLine().Split(',');
                         for (int j = 0; j < arrSt.Length; j++)
                         {
-                            maTran[i, j] = int.Parse(arrSt[j]);
+                            maTran[i,j] = int.Parse(arrSt[j]);
                         }
                     }
 
@@ -102,7 +101,7 @@ namespace TienIchDoThi
                     string line = "";
                     for (int j = 0 ; j <  maTran.GetLength(1) ; j++)
                     {
-                        line = j == (maTran.GetLength(1) - 1) ? line+=(maTran[i,j]) : line+=(maTran[i,j] + ",");
+                        line = (j == (maTran.GetLength(1) - 1)) ? line+=(maTran[i,j]) : line+=(maTran[i,j] + ",");
                     }
                     streamWriter.WriteLine(line);
                 }
@@ -119,9 +118,116 @@ namespace TienIchDoThi
         }
 
         // Fun4 : Tinh bac cua dinh ma tran ke (int[,] va dinh)
-        // public static int TinhBacCuaDinhMaTranKKe(int [,] maTran, int dinh)
-        // {
-            
-        // }
+        public static int TinhBacCuaDinhMaTranKKe(int [,] maTran, int dinh)
+        {
+            /*
+        ^-> 0 1 2 3  
+        0   0 1 1 0
+        1   1 0 0 1
+        2   1 0 0 1
+        3   0 1 1 0
+
+        exemple : 
+        Dinh 0 : co bac la : 2
+
+
+            */ 
+            int bac = 0;
+
+            for (int i = 0 ; i < maTran.GetLength(1) ; i++)
+            {
+                bac+=maTran[dinh,i];
+            }
+            return bac;
+        }
+
+        //Fun5 : Tinh va tra ve danh sach bac cua dinh ma tran ke (int [,]) return int [];
+        public static int[] TaoDanhSachBacCuaDinhMaTranKe(int[,] maTran)
+        {
+            int [] danhSachBac = new int[maTran.GetLength(0)];
+
+            for (int i = 0 ; i < maTran.GetLength(0) ; i++)
+            {
+                danhSachBac[i] = TinhBacCuaDinhMaTranKKe(maTran,i);
+            }
+
+            return danhSachBac;
+        }
+
+        /*CHUYEN DOI MA TRAN KKE SANG DANH SACH KE
+        ^-> 0 1 2 3  
+        0   0 1 1 0
+        1   1 0 0 1
+        2   1 0 0 1
+        3   0 1 1 0
+
+        => Danh sach ke sau kh ichuyen la : 
+        Dinh 0 : 1 2
+        Dinh 1 : 1 4
+        Dinh 2 : 1 4
+        Dinh 3 : 2 3
+
+        Luu y : Vi chua biet so luong item nen kkhong the dung array, ma thay vao do co the dung LinkList hoac List
+
+        */ 
+        public static List<List<int>> ChuyenMaTranKeSangDanhSachKe(int [,] maTranKe)
+        {
+            List<List<int>> danhSachKe = new List<List<int>>();
+
+            for (int i = 0 ; i < maTranKe.GetLength(0) ; i++)
+            {
+                danhSachKe.Add(new List<int>());
+                for (int j = 0 ; j < maTranKe.GetLength(1) ; j++)
+                {
+                    if (maTranKe[i,j] != 0)
+                    {
+                        danhSachKe[i].Add(j);
+                    }
+                }
+            }
+
+            return danhSachKe;
+        } 
+
+
+
+
+
+
+        //main
+        static void Main(string[] args)
+        {
+           int [,] maTranKe = DocMaTranTuFile("maTranKe.txt");
+           System.Console.WriteLine("Ghi file : " + GhiMaTranKeXuongFile(maTranKe,"testGhiMaTranKKe.txt"));
+           InMaTran(maTranKe);
+           int [] danhSachBacCuaDinh = TaoDanhSachBacCuaDinhMaTranKe(maTranKe);
+           InDanhSachBacCuaDinh(danhSachBacCuaDinh);
+           List<List<int>> danhSachKe = ChuyenMaTranKeSangDanhSachKe(maTranKe);
+           InDanhSachKe(danhSachKe);
+
+
+        }
+
+        static void InDanhSachBacCuaDinh(int[] dsBac)
+        {
+            for (int i= 0 ; i < dsBac.Length ; i++)
+            {
+                System.Console.WriteLine($"Dinh {i} co bac la : " + dsBac[i]);
+            }
+        }
+
+        static void InDanhSachKe( List<List<int>> danhSachKe)
+        {
+            int i = 0;
+            foreach (List<int> items in danhSachKe)
+            {
+                System.Console.Write($"Dinh {i} : " );
+                foreach (int item in items)
+                {
+                    System.Console.Write(item + " ");
+                }
+                System.Console.WriteLine();
+            }
+        }
     }
 }
