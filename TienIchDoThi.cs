@@ -273,26 +273,26 @@ namespace TienIchDoThi
             catch (System.Exception)
             {
 
-               System.Console.WriteLine("Doc file danh sach ke khong thanh cong");
+                System.Console.WriteLine("Doc file danh sach ke khong thanh cong");
             }
             return null;
         }
 
         //ghi file
-        public static bool GhiDanhSachKeVaoFile(List<List<int>> danhSachKe,string path)
+        public static bool GhiDanhSachKeVaoFile(List<List<int>> danhSachKe, string path)
         {
             try
             {
-                using(StreamWriter streamWriter = new StreamWriter(path))
+                using (StreamWriter streamWriter = new StreamWriter(path))
                 {
                     streamWriter.WriteLine(danhSachKe.Count);
 
-                    for (int i = 0 ; i < danhSachKe.Count ; i++)
+                    for (int i = 0; i < danhSachKe.Count; i++)
                     {
                         string line = "";
-                        for (int j = 0 ; j < danhSachKe[i].Count ; j++)
+                        for (int j = 0; j < danhSachKe[i].Count; j++)
                         {
-                            line = (j == danhSachKe[i].Count -1) ? line+=danhSachKe[i][j] : line+=danhSachKe[i][j] + ",";
+                            line = (j == danhSachKe[i].Count - 1) ? line += danhSachKe[i][j] : line += danhSachKe[i][j] + ",";
                         }
                         streamWriter.WriteLine((i + 1) + ":" + line);
                     }
@@ -302,7 +302,7 @@ namespace TienIchDoThi
             }
             catch (System.Exception)
             {
-                
+
                 System.Console.WriteLine("Ghi file danh sach ke khong thanh cong");
             }
             return false;
@@ -311,20 +311,20 @@ namespace TienIchDoThi
         /*BAC CUA DANH SACH KE : La so luong dinh cua cua dinh
         
         */
-        public static int TinhBacCuaDinhDanhSachKe(List<List<int>> danhSachKe,int dinh)
+        public static int TinhBacCuaDinhDanhSachKe(List<List<int>> danhSachKe, int dinh)
         {
             return danhSachKe[dinh].Count;
         }
 
         // yao danh sach bac cua dinh trong danh sach ke
 
-        public static int [] TaoDanhSachBacCuaDinhTrongDanhSachKe(List<List<int>> danhSachKe)
+        public static int[] TaoDanhSachBacCuaDinhTrongDanhSachKe(List<List<int>> danhSachKe)
         {
-            int [] dsBac = new int [danhSachKe.Count];
+            int[] dsBac = new int[danhSachKe.Count];
 
             for (int i = 0; i < danhSachKe.Count; i++)
             {
-                dsBac[i] = TinhBacCuaDinhDanhSachKe(danhSachKe,i);
+                dsBac[i] = TinhBacCuaDinhDanhSachKe(danhSachKe, i);
             }
             return dsBac;
         }
@@ -341,6 +341,7 @@ namespace TienIchDoThi
                     System.Console.Write(item + " ");
                 }
                 System.Console.WriteLine();
+                i++;
             }
         }
 
@@ -348,8 +349,8 @@ namespace TienIchDoThi
 
         => Danh sach ke 
         Dinh 0 : 1 2
-        Dinh 1 : 1 4
-        Dinh 2 : 1 4
+        Dinh 1 : 1 3
+        Dinh 2 : 1 3
         Dinh 3 : 2 3
 
         => Ma tran ke :
@@ -357,6 +358,48 @@ namespace TienIchDoThi
         0 1 0 1
         0 1 0 1
         0 0 1 1
+        */
+
+        public static int[,] ChuyenDanhSachKeSangMaTranKe(List<List<int>> danhSachKe)
+        {
+            int[,] maTranKe = new int[danhSachKe.Count, danhSachKe.Count];
+            for (int i = 0; i < danhSachKe.Count; i++)
+            {
+
+                for (int j = 0; j < danhSachKe.Count; j++)
+                {
+                    maTranKe[i,j] = 0;
+                }
+
+                int dem = 0;
+                for (int j = 0; j < danhSachKe[i].Count; j++)
+                {
+
+                    if (danhSachKe[i][j] == dem)
+                    {
+                        maTranKe[i, dem] = 1;
+
+                    }
+                    else{
+                        j--;
+                    }
+                    dem++;
+                    
+
+                }
+            }
+
+            return maTranKe;
+        }
+
+
+
+
+
+        /*
+        XET TINH LIEN THONG
+        fun1 : Xet tinh lien thong cau danh sach ke
+        fun2 : Xet tinh lien thong cua ma tran ke
         */
 
 
@@ -378,6 +421,10 @@ namespace TienIchDoThi
             int[] danhSachBacCuaDinhMTTrongSo = TaoDanhSachBacCuaDinhTrongMaTranTrongSo(maTranTrongSo);
             InDanhSachBacCuaDinh(danhSachBacCuaDinhMTTrongSo);
 
+            //chuyen danh sach ke sang ma tran ke
+            int[,] maTranKe2 = ChuyenDanhSachKeSangMaTranKe(danhSachKe);
+            InMaTran(maTranKe2);
+
 
 
 
@@ -391,6 +438,6 @@ namespace TienIchDoThi
             }
         }
 
-        
+
     }
 }
